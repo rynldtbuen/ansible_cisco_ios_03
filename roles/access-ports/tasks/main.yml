@@ -1,19 +1,5 @@
 ---
-- include: show_tasks/sh_vlan.yml
-
-- name: check if voice and data VLANs exist
-  set_fact:
-    vlan_list: "{{ output.response|map(attribute='vlan_id')|list }}"
-
-- name: fail if data vlan exist
-  fail: msg="no data VLAN {{ item.data }} found"
-  with_items: "{{ access_ports }}"
-  when: access_ports is defined and item.data|string not in vlan_list
-
-- name: fail if voice vlan exist
-  fail: msg="no voice VLAN {{ item.data }} found"
-  with_items: "{{ access_ports }}"
-  when: "'acc-sw' in group_names and item.voice|string not in vlan_list"
+- include: check_vlan.yml
 
 - name: access port configs
   ios_config:
@@ -24,7 +10,7 @@
     commands: show interfaces port-channel {{ item.group }}
     wait_for: result[0] contains 'line protocol is up'
   with_items: "{{ access_ports }}"
-  when: access_ports is defined and item.group is defined
+  when: item.group is defined
 
 - name: port-channel configs
   ios_config:

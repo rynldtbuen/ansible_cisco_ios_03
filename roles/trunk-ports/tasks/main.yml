@@ -1,31 +1,17 @@
 ---
-- include: show_tasks/sh_vlan.yml
-
-- name: check if native VLAN exist
-  set_fact:
-    vlan_list: "{{ output.response|map(attribute='vlan_id')|list }}"
-
-- name: create native VLAN if not exist
-  ios_config:
-    provider: "{{ provider }}"
-    parents: vlan {{ native }}
-    lines: name native_vlan
-  when: native|string not in vlan_list
+- include: check_native_vlan.yml
 
 - name: trunk port configs
   ios_config:
-    provider: "{{ provider }}"
     src: trunk-ports.j2
 
 - name: wait for port-channel/s to come up
   ios_command:
-    provider: "{{ provider }}"
     commands: show interfaces port-channel {{ item.group }}
     wait_for: result[0] contains 'line protocol is up'
   with_items: "{{ trunk_ports }}"
   when: item.group is defined
 
-- name: port-channel configs
+- name: port-channel interface configs
   ios_config:
-    provider: "{{ provider }}"
     src: port-channel.j2

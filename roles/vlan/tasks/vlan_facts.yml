@@ -1,0 +1,10 @@
+---
+- include: show_tasks/sh_vlan.yml
+
+- name: list of active VLANs on the device
+  set_fact:
+    vlans_active: "{{ show_vlan.response }}"
+
+- name: list of variable VLANs of the device
+  set_fact:
+    vlans_var: "{{ vlans|map(attribute='id')|list }}"

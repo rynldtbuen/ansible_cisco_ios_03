@@ -1,0 +1,16 @@
+---
+- include: show_tasks/sh_vlan.yml
+
+- name: check if voice and data VLANs exist
+  set_fact:
+    vlan_list: "{{ show_vlan.response|map(attribute='vlan_id')|list }}"
+
+- name: fail if data VLAN not exist
+  fail: msg="no data VLAN {{ item.data }} found"
+  with_items: "{{ access_ports }}"
+  when: item.data|string not in vlan_list
+
+- name: fail if voice VLAN not exist
+  fail: msg="no voice VLAN {{ item.voice }} found"
+  with_items: "{{ access_ports }}"
+  when: item.voice is defined and item.voice|string not in vlan_list

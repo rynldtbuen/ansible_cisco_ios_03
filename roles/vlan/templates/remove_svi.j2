@@ -1,0 +1,5 @@
+{% for c in svi_list %}
+    {% if c.interface|replace('Vlan', '')|int >= 2 and c.interface|replace('Vlan', '')|int not in vlans_var %}
+      no interface {{ c.interface }}
+    {% endif %}
+{% endfor %}
