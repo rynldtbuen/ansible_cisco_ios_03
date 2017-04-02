@@ -1,2 +1,2 @@
 # ansible_cisco_ios_03
-test playbook using roles and that leverage the use of https://github.com/networktocode/ntc-ansible
+test playbook using ios_config, ios_command and https://github.com/networktocode/ntc-ansible module. It also use roles, jinja2 template, filters.
