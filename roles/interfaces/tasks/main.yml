@@ -1,0 +1,15 @@
+---
+- name: switch virtual interface configs
+  ios_config:
+    src: svi.j2
+  when: svi_id is defined
+
+- name: loopback interface configs
+  ios_config:
+    src: loopback.j2
+  when: loop_id is defined
+
+- name: layer 3 interface configs
+  ios_config:
+    src: layer3int.j2
+  when: interfaces is defined

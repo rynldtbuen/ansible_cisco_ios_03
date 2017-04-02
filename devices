@@ -1,0 +1,24 @@
+[wan-router]
+wan-router01 ansible_host=10.0.0.10 ansible_hostname=wan-router01
+wan-router02 ansible_host=10.0.0.11 ansible_hostname=wan-router02
+
+[dist-sw]
+dist-sw01 ansible_host=10.0.0.20 ansible_hostname=dist-sw01
+dist-sw02 ansible_host=10.0.0.21 ansible_hostname=dist-sw02
+
+[edge-sw]
+edge-dist-sw01 ansible_host=10.0.0.30 ansible_hostname=edge-dist-sw01
+
+[acc-sw]
+acc-sw01 ansible_host=10.0.0.40 ansible_hostname=acc-sw01
+acc-sw02 ansible_host=10.0.0.41 ansible_hostname=acc-sw02
+acc-sw03 ansible__host=10.0.0.42 ansible_hostname=acc-sw03
+
+
+[switches:children]
+dist-sw
+acc-sw
+
+[all:vars]
+ansible_user=rey
+ansible_ssh_pass=cisco

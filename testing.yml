@@ -1,0 +1,10 @@
+---
+- name: ports configuration
+  hosts: dist-sw01
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+  - ios_config:
+      src: roles/vlan/templates/add_vlan.j2

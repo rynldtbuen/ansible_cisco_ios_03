@@ -1,0 +1,30 @@
+---
+- name: access switch
+  hosts: acc-sw
+  gather_facts: no
+  connection: local
+  serial: 1
+  roles:
+    - { role: vlan, tags: vlan }
+    - { role: access-ports, tags: access }
+    - { role: trunk-ports, tags: trunk }
+
+- name: distribution switch
+  hosts: dist-sw
+  gather_facts: no
+  connection: local
+  serial: 1
+  roles:
+    - { role: vlan, tags: vlan }
+    - { role: trunk-ports, tags: trunk }
+    - { role: interfaces, tags: int }
+    - { role: eigrp, tags: eigrp }
+
+- name: routers switch play
+  hosts: wan-router
+  gather_facts: no
+  connection: local
+  serial: 1
+  roles:
+    - { role: interfaces, tags: int }
+    - { role: eigrp, tags: eigrp }

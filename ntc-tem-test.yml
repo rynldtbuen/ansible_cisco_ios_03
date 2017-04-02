@@ -1,0 +1,23 @@
+---
+- name: ntc-ansible
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+  - name: get interface switchport
+    ntc_show_command:
+      connection: offline
+      file: "/ansible/ntc-ansible/ntc-templates/tests/cisco_ios/show_interfaces_switchport/cisco_ios_show_interfaces_switchport.raw"
+      platform: cisco_ios
+      command: show interfaces switchport
+      template_dir: "/ansible/ntc-ansible/ntc-templates/templates/"
+#      host: "{{ ansible_hostname }}"
+#      username: "{{ provider.username }}"
+#      password: "{{ provider.password }}"
+    register: output
+
+
+
+#  - debug: var=output.response

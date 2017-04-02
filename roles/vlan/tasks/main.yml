@@ -1,0 +1,24 @@
+---
+- name: create vlans
+  ios_config:
+    src: add_vlan.j2
+
+- include: show_tasks/sh_vlan.yml
+
+- name: list of active VLANs on the device
+  set_fact:
+    vlans_active: "{{ show_vlan.response }}"
+
+- name: list of variable VLANs of the device
+  set_fact:
+    vlans_var: "{{ vlans|map(attribute='id')|list }}"
+
+- include: show_tasks/sh_interface.yml
+
+- name: list of VLAN interface
+  set_fact:
+    svi_list: "{{ show_interface.response|selectattr('interface', 'match', '^Vlan')|list }}"
+
+- name: remove VLAN/s and associate VLAN/s interface
+  ios_config:
+    src: remove_vlan.j2

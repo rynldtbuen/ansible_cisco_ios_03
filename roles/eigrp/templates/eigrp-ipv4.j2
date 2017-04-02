@@ -1,0 +1,22 @@
+router eigrp 1
+    no auto-summary
+    eigrp router-id {{ router_id }}
+
+{# activate eigrp on interfaces #}
+{% for c in l3_int %} {% for i in interfaces %}
+    {% if c.interface|regex_replace('^Et.*t(.*)$', 'Et\\1') == i.interface %}
+    network {{ c.ip_address|ipv4('address') }} 0.0.0.0
+    {% endif %}
+{% endfor %} {% endfor %}
+
+{# activate eigrp on loopback interfaces #}
+{% for c in loopbacks %}
+    network {{ c.ip_address|ipv4('address') }} 0.0.0.0
+{% endfor %}
+
+{# activate eigrp switch virtual interface #}
+{% for c in svi %} {% if svi_id is defined and c.ip_address != "" %}
+    network {{ c.ip_address|ipv4('address') }} 0.0.0.0
+{% endif %} {% endfor %}
+
+{#set passive interfaces #}

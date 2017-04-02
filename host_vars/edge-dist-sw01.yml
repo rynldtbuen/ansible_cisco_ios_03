@@ -1,0 +1,7 @@
+---
+vlans:
+  - { id: 10, name: eigrp-routing }
+
+access_port_channel: false
+access_ports:
+  - { ports: ['Et0/0 - 3'], data: 10 }

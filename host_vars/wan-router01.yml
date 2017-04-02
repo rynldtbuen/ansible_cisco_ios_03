@@ -1,0 +1,5 @@
+---
+loop_id: 10
+
+interface: # - { interface: , host: , net: "{{ tem.net }}", mask: "{{ tem.mask }}" }
+  - { interface: 'Et0/0', host: 1, net: "{{ ma_01.net }}", mask: "{{ ma_01.mask }}" }

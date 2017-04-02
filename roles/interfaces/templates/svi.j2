@@ -1,0 +1,7 @@
+{% for c in vlans %}
+    {% if c.id|int < 254 %}
+    interface vlan{{ c.id }}
+      ip address 192.168.{{ c.id }}.{{ svi_id }} 255.255.255.0
+      no shutdown
+    {% endif %}
+{% endfor %}

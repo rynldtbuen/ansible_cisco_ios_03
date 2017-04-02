@@ -1,0 +1,22 @@
+---
+- include: show_tasks/sh_interface.yml
+
+- name: list of SVIs
+  set_fact:
+    svi: "{{ show_interface.response|selectattr('interface', 'match', '^Vlan')|list }}"
+
+- name: list of loopbacks
+  set_fact:
+    loopbacks: "{{ show_interface.response|selectattr('interface', 'match', '^Loopback')|list }}"
+
+- name: list of layer 3 interfaces
+  set_fact:
+    l3_int: "{{ show_interface.response|selectattr('interface', 'match', '^Et')|list }}"
+
+- name: set router-id of the device
+  set_fact:
+    router_id: "{{ show_interface.response|selectattr('interface', 'match', 'Loopback0')|map(attribute='ip_address')|ipv4('address')|list|join(',') }}"
+
+- name: eigrp-ipv4 config
+  ios_config:
+    src: eigrp-ipv4.j2

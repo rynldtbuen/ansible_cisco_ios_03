@@ -1,0 +1,19 @@
+---
+# Specify a range of ports to be trunk or access.
+# If you wanted to implement port-channel, just add the 'group' attribute
+# in the list of dictionaries.
+trunk_ports:
+  - { ports: ['Et0/0 - 1'], group: 1 }
+  - { ports: ['Et0/2 - 3'], group: 2 }
+  - { ports: ['Et1/0 - 1'], group: 3 }
+
+#access_ports:
+#  - { ports: ['Et1/0 - 3'], data: 100 }
+#  - { ports: ['Et2/0 - 3'], data: 120 }
+
+svi_id: 2
+loop_id: 21
+
+interface: # - { interface: , host: , net_id: "{{ tem.net }}", mask: "{{ tem.mask }}", rp: yes }
+  - { interface: 'Et2/0', host: 4, net: "{{ ma_01.net }}", mask: "{{ ma_01.mask }}", rp: yes }
+  - { interface: 'Et3/0', host: 2, net: "{{ ds_ptp_01.net }}", mask: "{{ ds_ptp_01.mask }}", rp: yes }
