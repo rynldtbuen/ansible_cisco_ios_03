@@ -1,0 +1,6 @@
+---
+- include: set_fact/interface_facts.yml
+
+- name: hsrp configs
+  ios_config:
+    src: hsrp.j2

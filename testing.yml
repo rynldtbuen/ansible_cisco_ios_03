@@ -1,10 +1,20 @@
 ---
-- name: ports configuration
-  hosts: dist-sw01
+- name: testing
+  hosts: all
   gather_facts: no
   connection: local
 
   tasks:
 
-  - ios_config:
-      src: roles/vlan/templates/add_vlan.j2
+#  - include_role:
+#      name: hsrp
+#      tasks_from: svi.yml
+
+#  - include_role:
+#      name: eigrp
+
+#  - include: set_fact/vlan_facts.yml
+
+#  - include_role:
+#      name: vlan
+#      tasks_from: remove_svi.yml

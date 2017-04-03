@@ -1,0 +1,14 @@
+---
+- include: ntc_show/sh_vlan.yml
+
+- name: list of active VLAN on a running device
+  set_fact:
+    vlan_list: "{{ show_vlan.response }}"
+
+- name: list of VLAN ID
+  set_fact:
+    vlan_id_list: "{{ show_vlan.response|map(attribute='vlan_id')|list }}"
+
+- name: list of variable VLAN on the host
+  set_fact:
+    var_vlan_list: "{{ vlans|map(attribute='id')|list }}"

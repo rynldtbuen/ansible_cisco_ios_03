@@ -1,5 +1,12 @@
 ---
-- include: facts.yml
+- name: ensure interfaces are configure
+  include_role:
+    name: interfaces
+
+- include: set_fact/interface_facts.yml
+
+- set_fact:
+    router_id: "{{ loopback_list|selectattr('interface', 'match', 'Loopback0')|map(attribute='ip_address')|ipv4('address')|join('') }}"
 
 - name: eigrp-ipv4 config
   ios_config:

@@ -1,6 +1,0 @@
----
-- include: show_tasks/sh_interface.yml
-
-- name: list of VLAN interface
-  set_fact:
-    svi_list: "{{ show_interface.response|selectattr('interface', 'match', '^Vlan')|list }}"

@@ -1,15 +1,8 @@
 ---
-- name: switch virtual interface configs
-  ios_config:
-    src: svi.j2
+- include: svi.yml
   when: svi_id is defined
 
-- name: loopback interface configs
-  ios_config:
-    src: loopback.j2
+- include: loopback.yml
   when: loop_id is defined
 
-- name: layer 3 interface configs
-  ios_config:
-    src: layer3int.j2
-  when: interfaces is defined
+- include: l3int.yml

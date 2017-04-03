@@ -16,9 +16,9 @@
   serial: 1
   roles:
     - { role: vlan, tags: vlan }
-    - { role: access-ports, tags: access }
     - { role: trunk-ports, tags: trunk }
     - { role: interfaces, tags: int }
+    - { role: hsrp, tags: hsrp }
     - { role: eigrp, tags: eigrp }
 
 - name: routers switch play

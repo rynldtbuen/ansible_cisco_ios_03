@@ -19,7 +19,3 @@ trunk_ports:
   - { ports: ['Et0/2 - 3'], group: 2 }
 
 allowed_vlans: "{{ vlans|map(attribute='id')|list|join(',') }}"
-
-
-
-#vlans: {{ vlan01 + native_vlan }}

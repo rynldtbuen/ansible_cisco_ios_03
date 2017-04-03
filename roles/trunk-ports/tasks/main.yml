@@ -1,5 +1,14 @@
 ---
-- include: check_native_vlan.yml
+- name: ensure native VLAN is created
+  include_role:
+    name: vlan
+    tasks_from: add_vlan.yml
+
+- include: set_fact/vlan_facts.yml
+
+- name: fail if native VLAN not exist on variable vlans
+  fail: msg="no native VLAN {{ native }} found on [switches] group_vars"
+  when: native|int not in var_vlan_list
 
 - name: trunk port configs
   ios_config:
