@@ -1,6 +1,6 @@
 # ansible_cisco_ios_03
 
-Playbook to automate Cisco devices configuration running IOS.
+Ansible playbook that automate network device configuration, provisioning and maintaining a Cisco device running IOS
 
 Topology: https://1drv.ms/i/s!Anv8ThLcbJaXg9ck6R1z2N3iPsyX5w
 
