@@ -3,16 +3,3 @@
   ios_config:
     src: add_vlan.j2
   when: vlans is defined
-
-- include: set_fact/vlan_facts.yml
-  when: vlans is defined
-- name: remove VLAN/s if not in variables vlans
-  ios_config:
-    src: remove_vlan.j2
-
-- include: set_fact/interface_facts.yml
-  when: svi_id is defined
-- name: remove SVI/s that do not have a VLAN
-  ios_config:
-    src: remove_svi.j2
-  when: svi_id is defined

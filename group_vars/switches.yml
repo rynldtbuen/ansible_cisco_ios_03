@@ -1,5 +1,5 @@
 ---
 native: 1000
 vlan_02:
-  - { id: "1000", name: native }
+  - { id: "1001", name: native }
   - { id: "1", name: default }

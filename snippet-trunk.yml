@@ -9,6 +9,9 @@
   - include_role:
       name: vlan
 
+  - set_fact:
+      var_vlan_list: "{{ vlans|map(attribute='id')|list }}"
+
   - include_role:
       name: switchports
       tasks_from: trunk.yml

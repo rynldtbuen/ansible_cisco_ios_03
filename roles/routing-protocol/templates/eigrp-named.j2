@@ -1,19 +1,21 @@
 router eigrp ansible-lab
     address-family ipv4 unicast autonomous-system 1
     {% if router_id is defined %}
-    eigrp router-id {{ router_id }}
+    eigrp router-id {{ router_id|ipv4('address')|join('') }}
     {% endif %}
     topology base
       no auto-summary
 
+    {# active eigrp on layer3 interfaces #}
     {% for c in interface_list %} {% for i in interfaces %}
-    {% if c.interface|regex_replace('^Et.*t(.*)$', 'Et\\1') == i.interface %}
+    {% if c.interface|regex_replace('^Et.*t(.*)$', 'Et\\1') == i.interface and c.ip_address != "" %}
 
       {# configure authentication #}
       af-interface {{ i.interface }}
           authentication mode hmac-sha-256 cisco-ansible
           authentication key-chain eigrp-key-chain
 
+          {# summary address of VLANs towards wan-routers #}
           {% if i.sum_add is defined %}
           summary-address {{ svi_net }}.0.0/16
           {% endif %}
@@ -25,9 +27,9 @@ router eigrp ansible-lab
     {% endfor %} {% endfor %}
 
     {# activate eigrp on loopback interfaces #}
-    {% for c in loopback_list %}
+    {% for c in loopback_list %} {% if loopback_list != [] %}
       network {{ c.ip_address|ipv4('address') }} 0.0.0.0
-    {% endfor %}
+    {% endif %} {% endfor %}
 
     {# activate eigrp on switch virtual interface #}
     {% for c in svi_list %} {% if svi_id is defined and c.ip_address != "" %}

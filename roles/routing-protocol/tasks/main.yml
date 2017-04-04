@@ -6,8 +6,7 @@
 - include: set_fact/interface_facts.yml
 
 - set_fact:
-    router_id: "{{ loopback_list|selectattr('interface', 'match', 'Loopback0')|map(attribute='ip_address')|ipv4('address')|join('') }}"
-#- include: static-default-route.yml
+    router_id: "{{ loopback_list|selectattr('interface', 'match', 'Loopback0')|map(attribute='ip_address')|list }}"
 
 - include: eigrp.yml
   when: eigrp

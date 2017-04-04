@@ -1,10 +1,11 @@
 ---
-- include: set_fact/vlan_facts.yml
-
 - name: ensure VLANs is created
   include_role:
     name: vlan
-  when: "'diffr1 != []' and 'diffr != []'"
+
+- name: list of VLAN variable on the host
+  set_fact:
+    var_vlan_list: "{{ vlans|map(attribute='id')|list }}"
 
 - include: access.yml
   when: access_ports is defined

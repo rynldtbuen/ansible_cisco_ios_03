@@ -1,11 +1,11 @@
 ---
-- name: fail if data VLAN not exist
-  fail: msg="no data VLAN {{ item.data }} found on {{ ansible_hostname }} host_vars"
+- name: fail if data VLAN not exist in vlan_01
+  fail: msg="no data VLAN {{ item.data }} found on {{ ansible_hostname }} vlan_01 variable"
   with_items: "{{ access_ports }}"
   when: item.data|string not in var_vlan_list
 
-- name: fail if voice VLAN not exist
-  fail: msg="no voice VLAN {{ item.voice }} found on {{ ansible_hostname }} host_vars"
+- name: fail if voice VLAN not exist in vlan_01
+  fail: msg="no voice VLAN {{ item.voice }} found on [{{ ansible_hostname }}] vlan_01 variable"
   with_items: "{{ access_ports }}"
   when: item.voice is defined and item.voice|string not in var_vlan_list
 

@@ -1,11 +1,11 @@
 ---
 - include: ntc_show/sh_vlan.yml
 
-- name: list of VLAN ID
+- name: list of active VLAN
   set_fact:
     vlan_id_list: "{{ show_vlan.response|map(attribute='vlan_id')|reject('match', '1001')|reject('match', '1002')|reject('match', '1003')|reject('match', '1004')|reject('match', '1004')|reject('match', '1005')|list }}"
 
-- name: list of variable VLAN on the host
+- name: list of variable VLAN
   set_fact:
     var_vlan_list: "{{ vlans|map(attribute='id')|list }}"
 
