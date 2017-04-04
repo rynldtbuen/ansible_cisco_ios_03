@@ -4,6 +4,7 @@
       switchport mode trunk
       switchport trunk allowed vlan {{ allowed_vlans }}
       switchport trunk native vlan {{ native }}
+      switchport trunk allowed vlan remove 1
       no shutdown
 {% endif %} {% endfor %}
 

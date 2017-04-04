@@ -1,0 +1,11 @@
+---
+- name: key chain configs
+  ios_config:
+    parents:
+      - key chain eigrp-key-chain
+      - key 1
+    lines: key-string named-eigrp-ansible
+
+- name: eigrp-ipv4 configs
+  ios_config:
+    src: eigrp-named.j2

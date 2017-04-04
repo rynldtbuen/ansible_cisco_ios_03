@@ -1,0 +1,14 @@
+---
+- name: access ports configs
+  hosts: acc-sw
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+  - include_role:
+      name: vlan
+
+  - include_role:
+      name: switchports
+      tasks_from: trunk.yml

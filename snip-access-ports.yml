@@ -1,0 +1,15 @@
+---
+- name: access ports configs
+  hosts: acc-sw
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+  - name: ensure VLANs is created
+    include_role:
+      name: vlan
+
+  - include_role:
+      name: switchports
+      tasks_from: access.yml

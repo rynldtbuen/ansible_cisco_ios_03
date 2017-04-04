@@ -12,7 +12,7 @@ vlans: "{{ vlan_01 + vlan_02 }}"
 # in the list of dictionaries.
 access_ports:
   - { ports: ['Et1/0 - 3'], voice: 10, data: 100 }
-  - { ports: ['Et2/0 - 3'], voice: 20, data: 120 }
+  - { ports: ['Et2/0 - 3,Et3/1 - 2'], voice: 20, data: 120 }
 
 trunk_ports:
   - { ports: ['Et0/0 - 1'], group: 1 }

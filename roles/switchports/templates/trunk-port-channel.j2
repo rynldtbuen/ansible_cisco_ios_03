@@ -2,4 +2,5 @@
     interface port-channel {{ c.group }}
       switchport trunk allowed vlan {{ allowed_vlans }}
       switchport trunk native vlan {{ native }}
+      switchport trunk allowed vlan remove 1
 {% endif %} {% endfor %}

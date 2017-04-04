@@ -14,6 +14,6 @@ trunk_ports:
 svi_id: 2
 loop_id: 21
 
-interfaces: # - { interface: , host: , net_id: "{{ tem.net }}", mask: "{{ tem.mask }}", rp: yes }
-  - { interface: 'Et2/0', host: 4, net: "{{ ma_01.net }}", mask: "{{ ma_01.mask }}", rp: yes }
-  - { interface: 'Et3/0', host: 2, net: "{{ ds_ptp_01.net }}", mask: "{{ ds_ptp_01.mask }}", rp: yes }
+interfaces: # - { interface: , host: , net_id: "{{ tem.net }}", mask: "{{ tem.mask }}", rp: true }
+  - { interface: 'Et2/0', host: 4, net: "{{ ma_01.net }}", mask: "{{ ma_01.mask }}", rp: true, sum_add: true }
+  - { interface: 'Et3/0', host: 2, net: "{{ ds_ptp_01.net }}", mask: "{{ ds_ptp_01.mask }}", rp: true }

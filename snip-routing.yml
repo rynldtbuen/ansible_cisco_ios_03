@@ -1,0 +1,23 @@
+---
+- name: routing protocol configuration
+  hosts: dist-sw,wan-router
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+  - include_role:
+      name: interfaces
+    tags: int
+
+  - include_role:
+      name: interfaces
+      tasks_from: layer3int.yml
+    tags: l3int
+
+  - include: set_fact/interface_facts.yml
+    tags: eigrp
+  - include_role:
+      name: routing-protocol
+      tasks_from: eigrp.yml
+    tags: eigrp

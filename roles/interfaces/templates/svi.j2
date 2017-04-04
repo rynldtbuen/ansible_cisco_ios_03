@@ -4,7 +4,8 @@
       delay 150
       bandwidth 10000
 
-      {% if redundancy_protocol == 'glbp' %}
+      {# configure glbp #}
+      {% if glbp %}
       glbp {{ c.id }} ip {{ svi_net }}.{{ c.id }}.{{ glbp_vip }}
       glbp {{ c.id }} load-balancing round-robin
 
