@@ -1,8 +1,4 @@
 ---
-- name: ensure VLANs is created
-  include_role:
-    name: vlan
-
 - name: list of VLAN variable on the host
   set_fact:
     var_vlan_list: "{{ vlans|map(attribute='id')|list }}"

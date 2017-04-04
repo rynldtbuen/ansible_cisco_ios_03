@@ -1,0 +1,9 @@
+{% for c in interfaces %}
+    interface {{ c.interface }}
+      {% if c.rp is defined %}
+        no switchport
+      {% endif %}
+
+      ip address {{ c.net }}.{{ c.host }} {{ c.mask }}
+      no shutdown
+{% endfor %}

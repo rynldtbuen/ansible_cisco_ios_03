@@ -1,0 +1,9 @@
+---
+- include: svi.yml
+  when: svi_id is defined
+
+- include: loopback.yml
+  when: loop_id is defined
+
+- include: layer3.yml
+  when: interfaces is defined
