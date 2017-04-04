@@ -1,11 +1,13 @@
 ---
 vlans: "{{ hostvars['acc-sw01']['vlan_01'] }} +
         {{ hostvars['acc-sw02']['vlan_01'] }} +
-        {{ native_vlan }}"
+        {{ vlan_02 }}"
 
 #vlan_01:
 #  - { id: 400, name: svi-dist-ptp-link }
 
 allowed_vlans: all
 
-hsrp_vip: 254
+glbp_vip: 254
+
+svi_net: 192.168

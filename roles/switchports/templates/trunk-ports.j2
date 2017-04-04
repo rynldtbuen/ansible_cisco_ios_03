@@ -1,0 +1,16 @@
+{% for c in trunk_ports %} {% if c.group is not defined %}
+    interface range {{ c.ports|join(',') }}
+      switchport trunk encapsulation dot1q
+      switchport mode trunk
+      switchport trunk allowed vlan {{ allowed_vlans }}
+      switchport trunk native vlan {{ native }}
+      no shutdown
+{% endif %} {% endfor %}
+
+{% for c in trunk_ports %} {% if c.group is defined %}
+    interface range {{ c.ports|join(',') }}
+      switchport trunk encapsulation dot1q
+      switchport mode trunk
+      no shutdown
+      channel-group {{ c.group }} mode on
+{% endif %} {% endfor %}

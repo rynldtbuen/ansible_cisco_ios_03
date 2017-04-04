@@ -1,17 +1,19 @@
 {% for c in access_ports %} {% if c.group is not defined %}
-  interface range {{ c.ports|join(',') }}
-    switchport mode access
-    switchport access vlan {{ c.data }}
+    interface range {{ c.ports|join(',') }}
+      switchport mode access
+      switchport access vlan {{ c.data }}
+
     {% if 'acc-sw' in group_names %}
       switchport voice vlan {{ c.voice|default('none') }}
       spanning-tree portfast
     {% endif %}
-    no shutdown
+
+      no shutdown
 {% endif %} {% endfor %}
 
 {% for c in access_ports %} {% if c.group is defined %}
-  interface range {{ c.ports|join(',') }}
-    switchport mode access
-    no shutdown
-    channel-group {{ c.group }} mode on
+    interface range {{ c.ports|join(',') }}
+      switchport mode access
+      no shutdown
+      channel-group {{ c.group }} mode on
 {% endif %} {% endfor %}

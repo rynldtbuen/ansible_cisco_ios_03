@@ -1,4 +1,0 @@
-{% for c in svi_list %} {% if svi_id is defined and c.ip_address != "" %}
-    interface {{ c.interface }}
-      no shutdown
-{% endif %} {% endfor %}

@@ -1,33 +1,25 @@
 ---
-- name: create VLAN before checking voice and data VLAN exist
-  include_role:
-    name: vlan
-    tasks_from: add_vlan.yml
-
-- name: get variable VLAN list
-  include: set_fact/vlan_facts.yml
-
 - name: fail if data VLAN not exist
   fail: msg="no data VLAN {{ item.data }} found on {{ ansible_hostname }} host_vars"
   with_items: "{{ access_ports }}"
-  when: item.data|int not in var_vlan_list
+  when: item.data|string not in var_vlan_list
 
 - name: fail if voice VLAN not exist
   fail: msg="no voice VLAN {{ item.voice }} found on {{ ansible_hostname }} host_vars"
   with_items: "{{ access_ports }}"
-  when: item.voice is defined and item.voice|int not in var_vlan_list
+  when: item.voice is defined and item.voice|string not in var_vlan_list
 
 - name: access port configs
   ios_config:
     src: access-ports.j2
 
-- name: wait for port-channel/s to come up
+- name: wait for access port-channel/s to come up
   ios_command:
     commands: show interfaces port-channel {{ item.group }}
     wait_for: result[0] contains 'line protocol is up'
   with_items: "{{ access_ports }}"
   when: item.group is defined
 
-- name: port-channel configs
+- name: access port-channel configs
   ios_config:
-    src: port-channel.j2
+    src: access-port-channel.j2

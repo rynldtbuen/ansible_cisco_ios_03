@@ -1,0 +1,4 @@
+{% for c in access_ports %} {% if c.group is defined %}
+    interface port-channel {{ c.group }}
+      switchport access vlan {{ c.data }}
+{% endif %} {% endfor %}

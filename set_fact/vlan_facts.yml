@@ -1,14 +1,18 @@
 ---
 - include: ntc_show/sh_vlan.yml
 
-- name: list of active VLAN on a running device
-  set_fact:
-    vlan_list: "{{ show_vlan.response }}"
-
 - name: list of VLAN ID
   set_fact:
-    vlan_id_list: "{{ show_vlan.response|map(attribute='vlan_id')|list }}"
+    vlan_id_list: "{{ show_vlan.response|map(attribute='vlan_id')|reject('match', '1001')|reject('match', '1002')|reject('match', '1003')|reject('match', '1004')|reject('match', '1004')|reject('match', '1005')|list }}"
 
 - name: list of variable VLAN on the host
   set_fact:
     var_vlan_list: "{{ vlans|map(attribute='id')|list }}"
+
+- name: difference between active VLANs and variable VLANs
+  set_fact:
+    diffr: "{{ var_vlan_list|difference(vlan_id_list) }}"
+
+- name: difference between active VLANs and variable VLANs
+  set_fact:
+    diffr1: "{{ vlan_id_list|difference(var_vlan_list) }}"

@@ -5,9 +5,7 @@
   connection: local
   serial: 1
   roles:
-    - { role: vlan, tags: vlan }
-    - { role: access-ports, tags: access }
-    - { role: trunk-ports, tags: trunk }
+    - { role: switchports, tags: access-trunk }
 
 - name: distribution switch
   hosts: dist-sw
@@ -15,10 +13,8 @@
   connection: local
   serial: 1
   roles:
-    - { role: vlan, tags: vlan }
-    - { role: trunk-ports, tags: trunk }
-    - { role: interfaces, tags: int }
-    - { role: hsrp, tags: hsrp }
+    - { role: switchports, tags: access-trunk }
+    - { role: glbp, tags: glbp }
     - { role: eigrp, tags: eigrp }
 
 - name: routers switch play
@@ -27,5 +23,4 @@
   connection: local
   serial: 1
   roles:
-    - { role: interfaces, tags: int }
     - { role: eigrp, tags: eigrp }

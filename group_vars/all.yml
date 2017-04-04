@@ -6,6 +6,10 @@ ntc:
 
 tftp_server: 10.0.0.1
 
+routing_protocol: eigrp
+
+redundancy_protocol: glbp
+
 ma_01: # multi-access network
   net: 172.16.254
   mask: 255.255.255.0

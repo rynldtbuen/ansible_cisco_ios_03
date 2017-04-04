@@ -1,5 +1,3 @@
-{% for c in vlan_list %}
-  {% if c.vlan_id|int not in var_vlan_list and c.vlan_id|int > 1 and c.vlan_id|int <= 1000  %}
-      no vlan {{ c.vlan_id }}
-  {% endif %}
-{% endfor %}
+{% for c in diffr1 %} {% if diffr1 != [] %}
+      no vlan {{ c }}
+{% endif %} {% endfor %}

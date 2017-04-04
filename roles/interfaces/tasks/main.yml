@@ -5,4 +5,5 @@
 - include: loopback.yml
   when: loop_id is defined
 
-- include: l3int.yml
+- include: layer3int.yml
+  when: interfaces is defined

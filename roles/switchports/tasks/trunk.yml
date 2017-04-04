@@ -1,26 +1,19 @@
 ---
-- name: ensure native VLAN is created
-  include_role:
-    name: vlan
-    tasks_from: add_vlan.yml
-
-- include: set_fact/vlan_facts.yml
-
 - name: fail if native VLAN not exist on variable vlans
   fail: msg="no native VLAN {{ native }} found on [switches] group_vars"
-  when: native|int not in var_vlan_list
+  when: native|string not in var_vlan_list
 
 - name: trunk port configs
   ios_config:
     src: trunk-ports.j2
 
-- name: wait for port-channel/s to come up
+- name: wait for trunk port-channel/s to come up
   ios_command:
     commands: show interfaces port-channel {{ item.group }}
     wait_for: result[0] contains 'line protocol is up'
   with_items: "{{ trunk_ports }}"
   when: item.group is defined
 
-- name: port-channel interface configs
+- name: trunk port-channel interface configs
   ios_config:
-    src: port-channel.j2
+    src: trunk-port-channel.j2

@@ -1,0 +1,13 @@
+---
+- include: set_fact/vlan_facts.yml
+
+- name: ensure VLANs is created
+  include_role:
+    name: vlan
+  when: "'diffr1 != []' and 'diffr != []'"
+
+- include: access.yml
+  when: access_ports is defined
+
+- include: trunk.yml
+  when: trunk_ports is defined

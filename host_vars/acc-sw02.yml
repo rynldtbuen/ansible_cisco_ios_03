@@ -1,9 +1,9 @@
 ---
 
 vlan_01:
-  - { id: 11, name: voice-11 }
-  - { id: 101, name: data-101 }
-vlans: "{{ vlan_01 + native_vlan }}"
+  - { id: "11", name: voice-11 }
+  - { id: "101", name: data-101 }
+vlans: "{{ vlan_01 + vlan_02 }}"
 
 # Specify a range of ports to be trunk or access.
 # If you wanted to implement port-channel, just add the 'group' attribute

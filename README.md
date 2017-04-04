@@ -19,3 +19,4 @@ Configuration:
     - layer 3 interface
   - routing protocols
     - eigrp
+  - gateway load balancing protocol

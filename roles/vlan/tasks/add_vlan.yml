@@ -1,4 +1,0 @@
----
-- name: create vlans
-  ios_config:
-    src: add_vlan.j2

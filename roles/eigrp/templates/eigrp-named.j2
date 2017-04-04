@@ -1,7 +1,8 @@
-router eigrp 1
+router eigrp ansible-lab
+  address-family ipv4 unicast autonomous-system 1
+  eigrp router-id {{ router_id }}
+  topology base
     no auto-summary
-    eigrp router-id {{ router_id }}
-
 {# activate eigrp on interfaces #}
     {% for c in interface_list %} {% for i in interfaces %}
     {% if c.interface|regex_replace('^Et.*t(.*)$', 'Et\\1') == i.interface %}
@@ -18,6 +19,3 @@ router eigrp 1
     {% for c in svi_list %} {% if svi_id is defined and c.ip_address != "" %}
       network {{ c.ip_address|ipv4('address') }} 0.0.0.0
     {% endif %} {% endfor %}
-
-
-{# set passive interfaces #}

@@ -10,4 +10,4 @@
 
 - name: eigrp-ipv4 config
   ios_config:
-    src: eigrp-ipv4.j2
+    src: eigrp-named.j2
