@@ -5,7 +5,7 @@
   connection: local
   serial: 1
   roles:
-    - { role: switchports, tags: access-trunk }
+    - { role: lan-switching, tags: lan }
 
 - name: distribution switch
   hosts: dist-sw
@@ -13,8 +13,10 @@
   connection: local
   serial: 1
   roles:
-    - { role: switchports, tags: access-trunk }
-    - { role: routing-protocol, tags: routing }
+    - { role: lan-switching, tags: lan }
+    - { role: interfaces, tags: int }
+    - { role: ip-services, tags: ip }
+    - { role: routing, tags: routing }
 
 - name: routers switch play
   hosts: wan-router
@@ -22,4 +24,6 @@
   connection: local
   serial: 1
   roles:
-     - { role: routing-protocol, tags: routing }
+    - { role: interfaces, tags: int }
+    - { role: ip-services, tags: ip }
+    - { role: routing, tags: routing }

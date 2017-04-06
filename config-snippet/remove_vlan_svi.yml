@@ -1,0 +1,8 @@
+---
+- name: routing config snippet
+  hosts: dist-sw,acc-sw
+  gather_facts: no
+  connection: local
+  serial: 1
+
+  tasks:

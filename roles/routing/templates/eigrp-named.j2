@@ -11,16 +11,18 @@ router eigrp ansible-lab
     {% if c.interface|regex_replace('^Et.*t(.*)$', 'Et\\1') == i.interface and c.ip_address != "" %}
 
       {# configure authentication #}
-      af-interface {{ i.interface }}
+      af-interface {{ c.interface }}
           authentication mode hmac-sha-256 cisco-ansible
           authentication key-chain eigrp-key-chain
 
           {# summary address of VLANs towards wan-routers #}
-          {% if i.sum_add is defined %}
+          {% if c.sum_add is defined and 'dist-sw' in group_names %}
           summary-address {{ svi_net }}.0.0/16
           {% endif %}
+          {% if c.sum_add is defined and 'wan-router' in group_names %}
+          summary-address 0.0.0.0/0
+          {% endif %}
 
-      {# activate eigrp on interfaces #}
       network {{ c.ip_address|ipv4('address') }} 0.0.0.0
 
     {% endif %}
@@ -28,10 +30,14 @@ router eigrp ansible-lab
 
     {# activate eigrp on loopback interfaces #}
     {% for c in loopback_list %} {% if loopback_list != [] %}
+
       network {{ c.ip_address|ipv4('address') }} 0.0.0.0
+
     {% endif %} {% endfor %}
 
     {# activate eigrp on switch virtual interface #}
     {% for c in svi_list %} {% if svi_id is defined and c.ip_address != "" %}
+
       network {{ c.ip_address|ipv4('address') }} 0.0.0.0
+
     {% endif %} {% endfor %}

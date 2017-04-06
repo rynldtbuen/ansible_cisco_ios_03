@@ -1,0 +1,7 @@
+---
+- set_fact:
+    var_vlan_list: "{{ vlans|map(attribute='id')|list }}"
+
+- include_role:
+    name: roles/lan-switching
+    tasks_from: tasks/access.yml

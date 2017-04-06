@@ -1,0 +1,14 @@
+{% for c in vlans %}
+{% if c.id|int < 254 and c.id|int > 1 %}
+
+    interface vlan{{ c.id }}
+      glbp {{ c.id }} ip {{ svi_net }}.{{ c.id }}.{{ glbp_vip }}
+      glbp {{ c.id }} load-balancing round-robin
+
+      {% if glbp_avg is defined %}
+      glbp {{ c.id }} priority 150
+      glbp {{ c.id }} preempt delay minimum 60
+      {% endif %}
+
+{% endif %}
+{% endfor %}

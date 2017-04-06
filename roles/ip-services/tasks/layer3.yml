@@ -1,4 +1,0 @@
----
-- name: layer 3 interface configs
-  ios_config:
-    src: layer3.j2

@@ -6,7 +6,7 @@
 - include: set_fact/interface_facts.yml
 
 - set_fact:
-    router_id: "{{ loopback_list|selectattr('interface', 'match', 'Loopback0')|map(attribute='ip_address')|list }}"
+    router_id: "{{ loopback_list|selectattr('interface', 'match', 'Loopback0')|map(attribute='ip_address') }}"
 
 - include: eigrp.yml
-  when: eigrp
+  when: routing_protocols.eigrp

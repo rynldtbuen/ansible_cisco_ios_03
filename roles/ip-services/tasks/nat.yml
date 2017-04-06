@@ -1,0 +1,5 @@
+---
+- name: network address translation configs
+  ios_config:
+    src: nat.j2
+  when: ip_services.nat

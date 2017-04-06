@@ -1,5 +1,6 @@
 ---
 loop_id: 10
 
-interface: # - { interface: , host: , net: "{{ tem.net }}", mask: "{{ tem.mask }}" }
-  - { interface: 'Et0/0', host: 1, net: "{{ ma_01.net }}", mask: "{{ ma_01.mask }}" }
+interfaces: # - { interface: , host: , net: "{{ tem.net }}", mask: "{{ tem.mask }}" }
+  - { interface: 'Et0/0', host: 1, net: "{{ ma_01.net }}", mask: "{{ ma_01.mask }}", sum_add: yes, ip_nat: inside }
+  - { interface: 'Et1/0', ip_nat: outside, dhcp: yes }

@@ -15,5 +15,7 @@ svi_id: 1
 loop_id: 20
 
 interfaces: # - { interface: , host: , net: "{{ tem.net }}", mask: "{{ tem.mask }}", rp: true }
-  - { interface: 'Et2/0', host: 3, net: "{{ ma_01.net }}", mask: "{{ ma_01.mask }}", rp: true, sum_add: true }
+  - { interface: 'Et2/0', host: 3, net: "{{ ma_01.net }}", mask: "{{ ma_01.mask }}", rp: true, sum_add: yes }
   - { interface: 'Et3/0', host: 1, net: "{{ ds_ptp_01.net }}", mask: "{{ ds_ptp_01.mask }}", rp: true }
+
+glbp_avg: true

@@ -1,4 +1,5 @@
 {% for c in access_ports %} {% if c.group is not defined %}
+
     interface range {{ c.ports|join(',') }}
       switchport mode access
       switchport access vlan {{ c.data }}
@@ -12,8 +13,10 @@
 {% endif %} {% endfor %}
 
 {% for c in access_ports %} {% if c.group is defined %}
+
     interface range {{ c.ports|join(',') }}
       switchport mode access
       no shutdown
       channel-group {{ c.group }} mode on
+      
 {% endif %} {% endfor %}

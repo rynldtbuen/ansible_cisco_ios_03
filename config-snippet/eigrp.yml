@@ -1,30 +1,31 @@
 ---
-- name: routing protocol configuration
+- name: routing config snippet
   hosts: dist-sw,wan-router
   gather_facts: no
   connection: local
+  serial: 1
 
   tasks:
 
   - include_role:
-      name: interfaces
-      tasks_from: svi.yml
+      name: roles/interfaces
+      tasks_from: tasks/svi.yml
     tags: svi
 
   - include_role:
-      name: interfaces
-      tasks_from: loopback.yml
+      name: roles/interfaces
+      tasks_from: tasks/loopback.yml
     tags: loop
 
   - include_role:
-      name: interfaces
-      tasks_from: layer3.yml
+      name: roles/interfaces
+      tasks_from: tasks/layer3.yml
     tags: layer3
 
   - include: set_fact/interface_facts.yml
     tags: ['svi', 'loop', 'layer3', 'eigrp']
 
   - include_role:
-      name: routing-protocol
-      tasks_from: eigrp.yml
+      name: roles/routing
+      tasks_from: tasks/eigrp.yml
     tags: ['svi', 'loop', 'layer3', 'eigrp']

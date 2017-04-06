@@ -1,9 +1,9 @@
 ---
 vlan_01:
-  - { id: "10", name: voice-10, }
-  - { id: "100", name: data-100 }
-  - { id: "20", name: voice-20 }
-  - { id: "120", name: data-120 }
+  - { id: "10", name: voice-10, root: pri }
+  - { id: "100", name: data-100, root: pri }
+  - { id: "20", name: voice-20, root: pri }
+  - { id: "120", name: data-120, root: pri }
 
 vlans: "{{ vlan_01 + vlan_02 }}"
 
@@ -11,7 +11,7 @@ vlans: "{{ vlan_01 + vlan_02 }}"
 # If you wanted to implement port-channel, just add the 'group' attribute
 # in the list of dictionaries.
 access_ports:
-  - { ports: ['Et1/0 - 3'], voice: 11, data: 100 }
+  - { ports: ['Et1/0 - 3'], voice: 10, data: 100 }
   - { ports: ['Et2/0 - 3'], voice: 20, data: 120 }
 
 trunk_ports:

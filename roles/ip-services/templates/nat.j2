@@ -1,0 +1,12 @@
+{% for c in interfaces %}
+
+    {% if c.ip_nat is defined %}
+    interface {{ c.interface }}
+      ip nat {{ c.ip_nat }}
+    {% endif %}
+
+    {% if c.ip_nat == 'outside' %}
+    ip nat source inside list nat-network interface {{ c.interface }}
+    {% endif %}
+
+{% endfor %}

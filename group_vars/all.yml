@@ -6,6 +6,13 @@ ntc:
 
 tftp_server: 10.0.0.1
 
+routing_protocols:
+  eigrp: true
+
+ip_services:
+  glbp: true
+  nat: true
+
 ma_01: # multi-access network
   net: 172.16.254
   mask: 255.255.255.0
@@ -14,6 +21,6 @@ ds_ptp_01: # point-to-point link between dist-sw01 and dist-sw02
   net: 172.16.100
   mask: 255.255.255.252
 
-eigrp: true
+glbp_vip: 254
 
-glbp: true
+svi_net: 192.168

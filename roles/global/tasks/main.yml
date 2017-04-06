@@ -1,6 +1,3 @@
 ---
 - include: glbp.yml
   when: ip_services.glbp
-
-- include: nat.yml
-  when: ip_services.nat

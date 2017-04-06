@@ -1,9 +1,18 @@
 {% for c in interfaces %}
+
     interface {{ c.interface }}
       {% if c.rp is defined %}
-        no switchport
+      no switchport
       {% endif %}
 
+      {% if c.net is defined %}
       ip address {{ c.net }}.{{ c.host }} {{ c.mask }}
+      {% endif %}
+
+      {% if c.dhcp is defined %}
+      ip address dhcp
+      {% endif %}
+
       no shutdown
+
 {% endfor %}

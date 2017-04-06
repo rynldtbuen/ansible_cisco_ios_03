@@ -1,0 +1,7 @@
+{# access-list to allow inside network out to internet #}
+ip access-list standard nat-network
+{% for c in hostvars['acc-sw01']['vlan_01'] + hostvars['acc-sw02']['vlan_01'] %}
+
+      permit {{ svi_net }}.{{ c.id }}.0 0.0.0.255
+
+{% endfor %}

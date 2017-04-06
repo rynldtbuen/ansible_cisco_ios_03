@@ -1,0 +1,24 @@
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+{% if ansible_hostname == 'dist-sw01' %}
+
+    {% for c in hostvars['acc-sw01']['vlan_01'] %}
+      spanning-tree vlan {{ c.id }} priority 4096
+    {% endfor %}
+    {% for c in hostvars['acc-sw02']['vlan_01'] %}
+      spanning-tree vlan {{ c.id }} priority 8192
+    {% endfor %}
+
+
+{% endif %}
+
+{% if ansible_hostname == 'dist-sw02' %}
+
+    {% for c in hostvars['acc-sw01']['vlan_01'] %}
+      spanning-tree vlan {{ c.id }} priority 8192
+    {% endfor %}
+    {% for c in hostvars['acc-sw02']['vlan_01'] %}
+      spanning-tree vlan {{ c.id }} priority 4096
+    {% endfor %}
+
+{% endif %}

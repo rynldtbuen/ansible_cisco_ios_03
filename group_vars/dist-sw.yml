@@ -7,7 +7,3 @@ vlans: "{{ hostvars['acc-sw01']['vlan_01'] }} +
 #  - { id: 400, name: svi-dist-ptp-link }
 
 allowed_vlans: all
-
-glbp_vip: 254
-
-svi_net: 192.168

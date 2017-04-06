@@ -1,0 +1,4 @@
+---
+- name: spanning-tree configs
+  ios_config:
+    src: stp.j2

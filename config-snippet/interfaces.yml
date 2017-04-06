@@ -1,0 +1,15 @@
+---
+- include_role:
+    name: roles/interfaces
+    tasks_from: tasks/svi.yml
+  tags: svi
+
+- include_role:
+    name: roles/interfaces
+    tasks_from: tasks/loopback.yml
+  tags: loop
+
+- include_role:
+    name: roles/interfaces
+    tasks_from: tasks/layer3.yml
+  tags: layer3
