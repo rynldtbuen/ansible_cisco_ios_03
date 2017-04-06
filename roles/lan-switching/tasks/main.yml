@@ -11,5 +11,3 @@
 
 - include: trunk.yml
   when: trunk_ports is defined
-
-- include: remove_vlan_svi.yml

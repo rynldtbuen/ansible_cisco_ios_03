@@ -21,6 +21,6 @@ ds_ptp_01: # point-to-point link between dist-sw01 and dist-sw02
   net: 172.16.100
   mask: 255.255.255.252
 
-glbp_vip: 254
+
 
 svi_net: 192.168
