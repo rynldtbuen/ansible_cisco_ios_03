@@ -14,6 +14,7 @@ device configuration:
     - vlan
     - access port/s, port-channel
     - trunk port/s, port-channel
+    - spanning-tree
  - interfaces
     - svi
     - routed ports
