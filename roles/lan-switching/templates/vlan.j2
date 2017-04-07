@@ -1,4 +1,4 @@
-{% for c in vlans %}
+{% for c in vlans %} {% if c.id|string not in actv_vlan_id %}
   vlan {{ c.id }}
     name {{ c.name }}
-{% endfor %}
+{% endif %} {% endfor %}

@@ -1,4 +1,6 @@
 ---
+- include: "{{ dir }}gather_facts/vlan.yml"
+
 - name: create vlans
   ios_config:
     src: vlan.j2

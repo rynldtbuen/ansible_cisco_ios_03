@@ -21,6 +21,7 @@ ds_ptp_01: # point-to-point link between dist-sw01 and dist-sw02
   net: 172.16.100
   mask: 255.255.255.252
 
-
-
 svi_net: 192.168
+
+
+dir: '/ansible/cisco-ansible/'

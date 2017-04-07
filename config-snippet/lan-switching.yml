@@ -1,0 +1,28 @@
+---
+- name: lan-switching config snippet
+  hosts: acc-sw,dist-sw
+  gather_facts: no
+  connection: local
+  serial: 1
+
+  tasks:
+
+  - include_role:
+      name: roles/lan-switching
+      tasks_from: vlan.yml
+    tags: vlan
+
+  - include_role:
+      name: roles/lan-switching
+      tasks_from: access.yml
+    tags: access
+
+  - include_role:
+      name: roles/lan-switching
+      tasks_from: stp.yml
+    tags: stp
+
+  - include_role:
+      name: roles/lan-switching
+      tasks_from: trunk.yml
+    tags: trunk

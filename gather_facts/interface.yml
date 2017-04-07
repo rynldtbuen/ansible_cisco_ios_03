@@ -1,5 +1,5 @@
 ---
-- include: ntc_show/sh_interface.yml
+- include: "{{ dir }}ntc_show/sh_interface.yml"
 
 - name: list of svi on a running device
   set_fact:

@@ -1,8 +1,34 @@
 ---
-- name: routing config snippet
+- name: remove/snyc VLANs
   hosts: dist-sw,acc-sw
   gather_facts: no
   connection: local
   serial: 1
 
   tasks:
+
+  - include_role:
+      name: roles/lan-switching
+      tasks_from: tasks/vlan.yml
+
+  - name: difference between active VLANs and variable VLANs
+    set_fact:
+      diffr: "{{ var_vlan_list|difference(vlan_id_list) }}"
+
+  - name: difference between active VLANs and variable VLANs
+    set_fact:
+      diffr1: "{{ vlan_id_list|difference(var_vlan_list) }}"
+
+  - name: remove vlan
+    ios_config:
+      lines: no vlan {{ item }}
+    with_items: "{{ diffr1 }}"
+    when: item != []
+
+  - include: "{{ dirc}}set_fact/interface_facts.yml"
+
+  - name: remove svi
+    ios_config:
+      lines: no interface {{ item.interface }}
+    with_items: "{{ svi_list }}"
+    when: item.interface|replace('Vlan', '')|string not in var_vlan_list

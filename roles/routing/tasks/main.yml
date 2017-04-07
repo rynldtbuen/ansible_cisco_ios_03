@@ -3,7 +3,7 @@
   include_role:
     name: interfaces
 
-- include: set_fact/interface_facts.yml
+- include: gather_facts/interface.yml
 
 - set_fact:
     router_id: "{{ loopback_list|selectattr('interface', 'match', 'Loopback0')|map(attribute='ip_address') }}"

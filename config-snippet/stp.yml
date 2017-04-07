@@ -1,4 +1,0 @@
----
-- include_role:
-    name: roles/lan-switching
-    tasks_from: tasks/stp.yml
