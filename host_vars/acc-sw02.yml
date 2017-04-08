@@ -1,8 +1,8 @@
 ---
-
 vlan_01:
   - { id: "11", name: voice-11 }
   - { id: "101", name: data-101 }
+
 vlans: "{{ vlan_01 + vlan_02 }}"
 
 # Specify a range of ports to be trunk or access.
@@ -15,4 +15,4 @@ trunk_ports:
   - { ports: ['Et0/0 - 1'], group: 1 }
   - { ports: ['Et0/2 - 3'], group: 2 }
 
-allowed_vlans: "{{ access_ports|map(attribute='voice')|list|join(',') }},{{access_ports|map(attribute='data')|list|join(',') }},{{ native }}"
+allowed_vlans: "{{ vlans|map(attribute='id')|list|join(',') }}"

@@ -7,6 +7,9 @@
 
   tasks:
 
+  - include: gather_facts/vlan.yml
+    tags: ['vlan', 'access', 'trunk']
+
   - include_role:
       name: roles/lan-switching
       tasks_from: vlan.yml

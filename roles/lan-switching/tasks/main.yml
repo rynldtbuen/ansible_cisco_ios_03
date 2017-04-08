@@ -1,8 +1,11 @@
 ---
-- include: vlan.yml
+- include: ntc_show/sh_vlan.yml
 
-- set_fact:
-    var_vlan_list: "{{ vlans|map(attribute='id')|list }}"
+- name: list of variable VLAN
+  set_fact:
+    vars_vlan_id: "{{ vlans|map(attribute='id')|list }}"
+
+- include: vlan.yml
 
 - include: access.yml
   when: access_ports is defined

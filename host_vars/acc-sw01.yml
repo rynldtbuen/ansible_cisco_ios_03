@@ -1,10 +1,12 @@
 ---
 vlan_01:
-  - { id: "10", name: voice-10, root: pri }
-  - { id: "100", name: data-100, root: pri }
-  - { id: "20", name: voice-20, root: pri }
-  - { id: "120", name: data-120, root: pri }
-  - { id: "121", name: data-120, root: pri }
+  - { id: '10', name: voice-10 }
+  - { id: '100', name: data-100 }
+  - { id: '20', name: voice-20 }
+  - { id: '120', name: data-120 }
+  - { id: '121', name: data-121 }
+
+
 vlans: "{{ vlan_01 + vlan_02 }}"
 
 # Specify a range of ports to be trunk or access.

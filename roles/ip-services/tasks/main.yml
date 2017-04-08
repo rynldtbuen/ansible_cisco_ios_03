@@ -2,5 +2,10 @@
 - include: glbp.yml
   when: ip_services.glbp
 
+- include_vars: vars/networks.yml
+- include_vars: vars/acl.yml
+
+- include: ntc_show/sh_access_list.yml
+
 - include: nat.yml
   when: ip_services.nat

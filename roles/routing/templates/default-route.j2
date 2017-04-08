@@ -1,1 +1,5 @@
-ip route 0.0.0.0 0.0.0.0 {{ isp1_ip }}
+{% for c in interfaces %}
+  {% if c.ip_nat == 'outside' %}
+  ip route 0.0.0.0 0.0.0.0 {{ isp1_ip }}
+  {% endif %}
+{% endfor %}

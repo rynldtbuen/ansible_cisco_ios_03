@@ -1,0 +1,11 @@
+---
+- name: show access-list
+  ntc_show_command:
+    connection: ssh
+    platform: cisco_ios
+    template_dir: "/ansible/ntc-ansible/ntc-templates/templates/"
+    command: show access-list
+    host: "{{ ansible_hostname }}"
+    username: "{{ ntc.user }}"
+    password: "{{ ntc.pass }}"
+  register: show_access_list

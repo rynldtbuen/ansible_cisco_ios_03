@@ -1,4 +1,0 @@
----
-- name: ip access-list configs
-  ios_config:
-    src: acl.j2

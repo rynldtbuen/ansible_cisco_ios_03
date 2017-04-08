@@ -1,12 +1,22 @@
 ---
-- name: ensure all interfaces are configure
-  include_role:
-    name: interfaces
+- include: ntc_show/sh_interface.yml
 
-- include: gather_facts/interface.yml
+- include_vars: vars/networks.yml
+
+- name: list of svi on a running device
+  set_fact:
+    svi_list: "{{ show_interface.response|selectattr('interface', 'match', '^Vlan')|list }}"
+
+- name: list of loopback interface
+  set_fact:
+    loopback_list: "{{ show_interface.response|selectattr('interface', 'match', '^Loopback')|list }}"
+
+- name: list of layer 3 interface
+  set_fact:
+    interface_list: "{{ show_interface.response|selectattr('interface', 'match', '^Et')|list }}"
 
 - set_fact:
-    router_id: "{{ loopback_list|selectattr('interface', 'match', 'Loopback0')|map(attribute='ip_address') }}"
+    router_id: "{{ loopback_list|selectattr('interface', 'match', 'Loopback0')|map(attribute='ip_address')|list }}"
 
 - include: eigrp.yml
   when: routing_protocols.eigrp

@@ -1,5 +1,13 @@
 ---
+- set_fact:
+    acl: "{{ show_access_list.response|selectattr('name', 'match', 'nat-network')|map(attribute='sn')|list }}"
+
+- set_fact:
+    acl1: "{{ nat_network|map(attribute='seq_no')|list }}"
+
+- set_fact:
+    diff: "{{ acl|difference(acl1) }}"
+
 - name: network address translation configs
   ios_config:
     src: nat.j2
-  when: ip_services.nat

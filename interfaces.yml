@@ -1,6 +1,6 @@
 ---
 - name: interfaces config snippet
-  hosts: acc-sw,dist-sw
+  hosts: all
   gather_facts: no
   connection: local
   serial: 1

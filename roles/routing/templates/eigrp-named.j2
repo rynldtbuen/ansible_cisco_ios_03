@@ -1,43 +1,46 @@
 router eigrp ansible-lab
     address-family ipv4 unicast autonomous-system 1
-    {% if router_id is defined %}
+    {% if router_id != [] %}
     eigrp router-id {{ router_id|ipv4('address')|join('') }}
     {% endif %}
     topology base
       no auto-summary
 
     {# active eigrp on layer3 interfaces #}
-    {% for c in interface_list %} {% for i in interfaces %}
-    {% if c.interface|regex_replace('^Et.*t(.*)$', 'Et\\1') == i.interface and c.ip_address != "" %}
+    {% for c in interface_list %}
+      {% for i in interfaces %}
 
-      {# configure authentication #}
-      af-interface {{ c.interface }}
-          authentication mode hmac-sha-256 cisco-ansible
-          authentication key-chain eigrp-key-chain
+          {% if c.interface|regex_replace('^Et.*t(.*)$', 'Et\\1') == i.interface and c.ip_address != "" %}
+          {# configure authentication #}
+          af-interface {{ c.interface }}
+              authentication mode hmac-sha-256 cisco-ansible
+              authentication key-chain eigrp-key-chain
 
-          {# summary address of VLANs towards wan-routers #}
-          {% if c.sum_add is defined and 'dist-sw' in group_names %}
-          summary-address {{ svi_net }}.0.0/16
+              {# configure summary route #}
+              {% if i.sum_add is defined %}
+              summary-address {{ i.sum_add }}
+              {% endif %}
+
+              network {{ c.ip_address|ipv4('address') }} 0.0.0.0
           {% endif %}
-          {% if c.sum_add is defined and 'wan-router' in group_names %}
-          summary-address 0.0.0.0/0
-          {% endif %}
 
-      network {{ c.ip_address|ipv4('address') }} 0.0.0.0
-
-    {% endif %}
-    {% endfor %} {% endfor %}
+      {% endfor %}
+    {% endfor %}
 
     {# activate eigrp on loopback interfaces #}
-    {% for c in loopback_list %} {% if loopback_list != [] %}
+    {% for c in loopback_list %}
+      {% if loopback_list != [] %}
 
-      network {{ c.ip_address|ipv4('address') }} 0.0.0.0
+          network {{ c.ip_address|ipv4('address') }} 0.0.0.0
 
-    {% endif %} {% endfor %}
+      {% endif %}
+    {% endfor %}
 
     {# activate eigrp on switch virtual interface #}
-    {% for c in svi_list %} {% if svi_id is defined and c.ip_address != "" %}
+    {% for c in svi_list %}
+      {% if svi_id is defined and c.ip_address != "" %}
 
-      network {{ c.ip_address|ipv4('address') }} 0.0.0.0
+        network {{ c.ip_address|ipv4('address') }} 0.0.0.0
 
-    {% endif %} {% endfor %}
+      {% endif %}
+    {% endfor %}

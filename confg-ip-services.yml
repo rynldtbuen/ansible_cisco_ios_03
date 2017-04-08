@@ -1,0 +1,24 @@
+---
+- name: ip-services config snippet
+  hosts: all
+  gather_facts: no
+  connection: local
+  serial: 1
+
+  tasks:
+
+  - include_role:
+      name: roles/ip-services
+      tasks_from: tasks/glbp.yml
+    tags: glbp
+
+
+  - include_vars: vars/acl.yml
+    tags: nat
+  - include_vars: vars/networks.yml
+    tags: nat
+  - include: gather_facts/sh_access_list.yml
+  - include_role:
+      name: roles/ip-services
+      tasks_from: tasks/nat.yml
+    tags: nat

@@ -1,6 +1,6 @@
 ---
-- name: routing config snippet
-  hosts: dist-sw,wan-router
+- name: interfaces config snippet
+  hosts: all
   gather_facts: no
   connection: local
   serial: 1
@@ -17,15 +17,10 @@
       tasks_from: tasks/loopback.yml
     tags: loop
 
+  - include_vars: vars/networks.yml
+    tags: layer3
+
   - include_role:
       name: roles/interfaces
       tasks_from: tasks/layer3.yml
     tags: layer3
-
-  - include: set_fact/interface_facts.yml
-    tags: ['svi', 'loop', 'layer3', 'eigrp']
-
-  - include_role:
-      name: roles/routing
-      tasks_from: tasks/eigrp.yml
-    tags: ['svi', 'loop', 'layer3', 'eigrp']

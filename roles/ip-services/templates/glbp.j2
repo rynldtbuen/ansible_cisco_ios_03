@@ -1,3 +1,4 @@
+{% if 'dist-sw' in group_names %}
 {% for c in vlans %}
 {% if c.id|int < 254 and c.id|int > 1 %}
 
@@ -12,3 +13,4 @@
 
 {% endif %}
 {% endfor %}
+{% endif %}

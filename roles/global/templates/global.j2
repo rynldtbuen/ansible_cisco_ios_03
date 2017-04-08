@@ -1,4 +1,3 @@
 
-{% if 'dist-sw' in group_names %}
-mac address-table aging-time 14400
-{% endif %}
+line vty  0 4
+  access-class vty-line in
