@@ -7,25 +7,27 @@
 
   tasks:
 
-  - include: gather_facts/vlan.yml
+  - include_role:
+      name: lan-switching
+      tasks_from: facts.yml
     tags: ['vlan', 'access', 'trunk']
 
   - include_role:
-      name: roles/lan-switching
+      name: lan-switching
       tasks_from: vlan.yml
     tags: vlan
 
   - include_role:
-      name: roles/lan-switching
+      name: lan-switching
       tasks_from: access.yml
     tags: access
 
   - include_role:
-      name: roles/lan-switching
+      name: lan-switching
       tasks_from: stp.yml
     tags: stp
 
   - include_role:
-      name: roles/lan-switching
+      name: lan-switching
       tasks_from: trunk.yml
     tags: trunk

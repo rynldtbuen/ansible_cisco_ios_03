@@ -9,5 +9,6 @@ vlans: "{{ hostvars['acc-sw01']['vlan_01'] }} +
 allowed_vlans: all
 
 glbp_vip: 254
+glbp: true
 
 svi_net: 192.168

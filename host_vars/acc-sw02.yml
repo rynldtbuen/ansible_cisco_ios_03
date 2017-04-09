@@ -1,7 +1,7 @@
 ---
 vlan_01:
-  - { id: "11", name: voice-11 }
-  - { id: "101", name: data-101 }
+  - { id: '11', name: voice-11 }
+  - { id: '101', name: data-101 }
 
 vlans: "{{ vlan_01 + vlan_02 }}"
 

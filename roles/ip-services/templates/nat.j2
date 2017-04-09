@@ -1,24 +1,33 @@
-{% if diff != [] %}
-ip access-list standard nat-network
-  {% for c in diff %}
-  no {{ c }}
-  {% endfor %}
-{% endif %}
-
-ip access-list standard nat-network
-{% for c in nat_network %}
-  {{ c.seq_no }} {{ c.line }}
-{% endfor %}
-
-{% for c in interfaces %}
-    {% if c.ip_nat is defined %}
-    interface {{ c.interface }}
-      ip nat {{ c.ip_nat }}
-    {% endif %}
-{% endfor %}
-
 {% for c in interfaces %}
     {% if c.ip_acc is defined %}
-    ip nat inside source list {{ c.ip_acc }} interface E1/0
+    {% if diff != [] %}
+        ip access-list standard {{ c.ip_acc }}
+        {% for c in diff %}
+          no {{ c }}
+        {% endfor %}
     {% endif %}
+    {% endif %}
+{% endfor %}
+
+{% for c in interfaces %}
+{% if c.ip_acc is defined %}
+    ip access-list standard {{ c.ip_acc }}
+    {% for c in nat_acl %}
+      {{ c.seq_no }} {{ c.line }}
+    {% endfor %}
+{% endif %}
+{% endfor %}
+
+
+{% for c in interfaces %}
+{% if c.ip_nat is defined %}
+    interface {{ c.interface }}
+      ip nat {{ c.ip_nat }}
+{% endif %}
+{% endfor %}
+
+{% for c in interfaces %}
+{% if c.ip_acc is defined %}
+    ip nat inside source list {{ c.ip_acc }} interface E1/0
+{% endif %}
 {% endfor %}

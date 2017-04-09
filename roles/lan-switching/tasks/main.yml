@@ -1,9 +1,5 @@
 ---
-- include: ntc_show/sh_vlan.yml
-
-- name: list of variable VLAN
-  set_fact:
-    vars_vlan_id: "{{ vlans|map(attribute='id')|list }}"
+- include: facts.yml
 
 - include: vlan.yml
 

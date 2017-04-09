@@ -2,13 +2,13 @@
 loop_id: 10
 
 interfaces: # - { interface: , host: , net: "{{ tem.net }}", mask: "{{ tem.mask }}" }
-  - { interface: 'Et0/0', host: 1, net: "{{ ma_01.net }}", mask: "{{ ma_01.mask }}", sum_add: '0.0.0.0/0', ip_nat: inside, ip_acc: nat-network }
+  - { interface: 'Et0/0', host: 1, net: "{{ ma_01.net }}", mask: "{{ ma_01.mask }}", sum_add: '0.0.0.0/0', ip_nat: inside, ip_acc: nat_acl }
   - { interface: 'Et1/0', ip_nat: outside, dhcp: yes }
 
-nat_network:
+nat: true
+
+nat_acl:
   - seq_no: "11"
-    line: deny 10.1.0.0 0.0.255.255
+    line: permit 192.168.0.0 0.0.255.255
   - seq_no: "21"
-    line: deny 10.2.0.0 0.0.255.255
-  - seq_no: "31"
-    line: permit 10.0.0.0 0.0.255.255
+    line: permit 10.0.0.0 0.0.0.255

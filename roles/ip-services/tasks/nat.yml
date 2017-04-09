@@ -1,9 +1,11 @@
 ---
-- set_fact:
-    acl: "{{ show_access_list.response|selectattr('name', 'match', 'nat-network')|map(attribute='sn')|list }}"
+- include: ntc_show/sh_access_list.yml
 
 - set_fact:
-    acl1: "{{ nat_network|map(attribute='seq_no')|list }}"
+    acl: "{{ show_access_list.response|selectattr('name', 'match', 'nat_acl')|map(attribute='sn')|list }}"
+
+- set_fact:
+    acl1: "{{ nat_acl|map(attribute='seq_no')|list }}"
 
 - set_fact:
     diff: "{{ acl|difference(acl1) }}"

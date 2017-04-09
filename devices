@@ -15,6 +15,11 @@ acc-sw02 ansible_host=10.0.0.41 ansible_hostname=acc-sw02
 acc-sw03 ansible__host=10.0.0.42 ansible_hostname=acc-sw03
 
 
+[layer3dev:children]
+wan-router
+dist-sw
+
+
 [switches:children]
 dist-sw
 acc-sw

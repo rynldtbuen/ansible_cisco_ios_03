@@ -1,4 +1,6 @@
 ---
+eigrp: false
+
 ma_01: # multi-access network
   net: 172.16.252
   mask: 255.255.255.240

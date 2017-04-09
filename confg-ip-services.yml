@@ -12,12 +12,14 @@
       tasks_from: tasks/glbp.yml
     tags: glbp
 
-
   - include_vars: vars/acl.yml
     tags: nat
   - include_vars: vars/networks.yml
     tags: nat
-  - include: gather_facts/sh_access_list.yml
+
+  - include: ntc_show/sh_access_list.yml
+    tags: nat
+
   - include_role:
       name: roles/ip-services
       tasks_from: tasks/nat.yml

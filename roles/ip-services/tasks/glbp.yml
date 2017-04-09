@@ -2,4 +2,4 @@
 - name: gateway load balancing protocol
   ios_config:
     src: glbp.j2
-  when: ip_services.glbp
+  when: glbp

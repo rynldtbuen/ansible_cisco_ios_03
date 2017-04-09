@@ -6,9 +6,6 @@ ntc:
 
 tftp_server: 10.0.0.1
 
-routing_protocols:
-  eigrp: true
-
-ip_services:
-  glbp: true
-  nat: true
+vty_acl:
+  - seq_no: "10"
+    line: permit host 10.0.0.1

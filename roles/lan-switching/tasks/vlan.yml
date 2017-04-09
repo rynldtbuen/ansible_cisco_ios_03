@@ -1,8 +1,4 @@
 ---
-- name: list of active VLAN
-  set_fact:
-    active_vlan_id: "{{ show_vlan.response|map(attribute='vlan_id')|reject('match', '1001')|reject('match', '1002')|reject('match', '1003')|reject('match', '1004')|reject('match', '1004')|reject('match', '1005')|list }}"
-
 - name: create vlans
   ios_config:
     src: vlan.j2

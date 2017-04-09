@@ -1,0 +1,17 @@
+---
+- include: ntc_show/sh_interface.yml
+
+- name: list of svi on a running device
+  set_fact:
+    svi_list: "{{ show_interface.response|selectattr('interface', 'match', '^Vlan')|list }}"
+
+- name: list of loopback interface
+  set_fact:
+    loopback_list: "{{ show_interface.response|selectattr('interface', 'match', '^Loopback')|list }}"
+
+- name: list of layer 3 interface
+  set_fact:
+    interface_list: "{{ show_interface.response|selectattr('interface', 'match', '^Et')|list }}"
+
+- set_fact:
+    router_id: "{{ loopback_list|selectattr('interface', 'match', 'Loopback0')|map(attribute='ip_address')|list }}"
