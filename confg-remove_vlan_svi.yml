@@ -8,8 +8,12 @@
   tasks:
 
   - include_role:
-      name: roles/lan-switching
-      tasks_from: tasks/vlan.yml
+      name: lan-switching
+      tasks_from: facts.yml
+
+  - include_role:
+      name: lan-switching
+      tasks_from: vlan.yml
 
   - name: difference between active VLANs and variable VLANs
     set_fact:
@@ -25,7 +29,9 @@
     with_items: "{{ diffr1 }}"
     when: item != []
 
-  - include: "{{ dirc}}set_fact/interface_facts.yml"
+  - include_role:
+      name: routing
+      tasks_from: facts.yml
 
   - name: remove svi
     ios_config:

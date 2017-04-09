@@ -1,5 +1,5 @@
 ---
-eigrp: false
+eigrp: true
 
 ma_01: # multi-access network
   net: 172.16.252

@@ -1,0 +1,9 @@
+{% for c in interfaces if c.ip_acc is defined %}
+ip access-list standard {{ c.ip_acc }}
+    {% for i in diff if diff != [] %}
+        no {{ i }}
+    {% endfor %}
+    {% for i in nat_acl %}
+      {{ i.seq_no }} {{ i.line }}
+    {% endfor %}
+{% endfor %}

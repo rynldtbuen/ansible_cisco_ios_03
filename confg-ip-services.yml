@@ -8,19 +8,16 @@
   tasks:
 
   - include_role:
-      name: roles/ip-services
-      tasks_from: tasks/glbp.yml
+      name: ip-services
+      tasks_from: glbp.yml
     tags: glbp
 
-  - include_vars: vars/acl.yml
-    tags: nat
-  - include_vars: vars/networks.yml
-    tags: nat
-
-  - include: ntc_show/sh_access_list.yml
-    tags: nat
+  - include_role:
+      name: ip-services
+      tasks_from: acl.yml
+    tags: acl
 
   - include_role:
-      name: roles/ip-services
-      tasks_from: tasks/nat.yml
+      name: ip-services
+      tasks_from: nat.yml
     tags: nat
