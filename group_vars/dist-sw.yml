@@ -3,9 +3,6 @@ vlans: "{{ hostvars['acc-sw01']['vlan_01'] }} +
         {{ hostvars['acc-sw02']['vlan_01'] }} +
         {{ vlan_02 }}"
 
-#vlan_01:
-#  - { id: 400, name: svi-dist-ptp-link }
-
 allowed_vlans: all
 
 glbp_vip: 254

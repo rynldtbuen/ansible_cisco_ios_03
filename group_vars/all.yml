@@ -5,7 +5,3 @@ ntc:
   pass: cisco
 
 tftp_server: 10.0.0.1
-
-vty_acl:
-  - seq_no: "10"
-    line: permit host 10.0.0.1
