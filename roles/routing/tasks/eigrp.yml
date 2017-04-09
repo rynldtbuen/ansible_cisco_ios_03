@@ -1,5 +1,4 @@
 ---
-
 - name: key chain configs
   ios_config:
     parents:

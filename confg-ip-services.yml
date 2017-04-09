@@ -1,6 +1,6 @@
 ---
 - name: ip-services config snippet
-  hosts: all
+  hosts: layer3dev
   gather_facts: no
   connection: local
   serial: 1
@@ -10,13 +10,10 @@
       name: ip-services
       tasks_from: glbp.yml
     tags: glbp
-
-  - include_role:
-      name: ip-services
-      tasks_from: acl.yml
-    tags: acl
+    when: glbp is defined
 
   - include_role:
       name: ip-services
       tasks_from: nat.yml
     tags: nat
+    when: nat is defined

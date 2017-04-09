@@ -1,5 +1,4 @@
 ---
-
 - include: ntc_show/sh_interface.yml
 
 - name: list of svi on a running device

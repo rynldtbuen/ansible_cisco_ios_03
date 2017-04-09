@@ -1,5 +1,4 @@
 ---
-
 - include: ntc_show/sh_access_list.yml
 
 - set_fact:

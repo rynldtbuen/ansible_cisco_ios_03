@@ -20,6 +20,7 @@
       name: lan-switching
       tasks_from: access.yml
     tags: access
+    when: access_ports is defined
 
   - include_role:
       name: lan-switching
@@ -30,3 +31,4 @@
       name: lan-switching
       tasks_from: trunk.yml
     tags: trunk
+    when: access_ports is defined

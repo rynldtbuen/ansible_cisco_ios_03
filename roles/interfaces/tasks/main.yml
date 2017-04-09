@@ -1,5 +1,4 @@
 ---
-
 - include: svi.yml
   when: svi_id is defined
 

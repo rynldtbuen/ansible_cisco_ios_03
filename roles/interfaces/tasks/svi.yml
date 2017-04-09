@@ -1,5 +1,4 @@
 ---
-
 - name: switch virtual interface configs
   ios_config:
     src: svi.j2

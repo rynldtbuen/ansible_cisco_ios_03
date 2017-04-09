@@ -1,10 +1,6 @@
 ---
-
 - include: glbp.yml
-  when: glbp and glbp is defined
-
-- include: acl.yml
-  when: acl is defined
+  when: glbp is defined
 
 - include: nat.yml
-  when: nat and nat is defined
+  when: nat is defined

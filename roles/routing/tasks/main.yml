@@ -1,6 +1,5 @@
 ---
-
 - include: facts.yml
-
+  
 - include: eigrp.yml
-  when: eigrp and eigrp is defined
+  when: eigrp is defined

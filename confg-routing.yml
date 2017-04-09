@@ -10,16 +10,19 @@
       name: interfaces
       tasks_from: svi.yml
     tags: svi
+    when: svi_id is defined
 
   - include_role:
       name: interfaces
       tasks_from: loopback.yml
     tags: loop
+    when: loop_id is defined
 
   - include_role:
       name: interfaces
       tasks_from: layer3.yml
     tags: layer3
+    when: interfaces is defined
 
   - include_role:
       name: routing
