@@ -2,13 +2,13 @@
 - include: ntc_show/sh_access_list.yml
 
 - set_fact:
-    acl: "{{ show_access_list.response|selectattr('name', 'match', 'nat_acl')|map(attribute='sn')|list }}"
+    running_acl: "{{ show_access_list.response|selectattr('name', 'match', 'nat_net')|map(attribute='sn')|list }}"
 
 - set_fact:
-    acl1: "{{ nat_acl|map(attribute='seq_no')|list }}"
+    vars_acl: "{{ nat_net|map(attribute='seq_no')|list }}"
 
 - set_fact:
-    diff: "{{ acl|difference(acl1) }}"
+    diff: "{{ running_acl|difference(vars_acl) }}"
 
 - name: network address translation configs
   ios_config:
