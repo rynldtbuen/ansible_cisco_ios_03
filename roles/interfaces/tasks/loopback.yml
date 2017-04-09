@@ -1,4 +1,5 @@
 ---
+
 - name: loopback interface configs
   ios_config:
     src: loopback.j2

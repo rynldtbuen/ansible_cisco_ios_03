@@ -6,48 +6,27 @@
   serial: 1
 
   tasks:
-
-  - include: ntc_show/sh_interface.yml
-    tags: ['svi', 'loop', 'layer3', 'eigrp']
-
-  - name: list of svi on a running device
-    set_fact:
-      svi_list: "{{ show_interface.response|selectattr('interface', 'match', '^Vlan')|list }}"
-    tags: ['svi', 'loop', 'layer3', 'eigrp']
-
-  - name: list of loopback interface
-    set_fact:
-      loopback_list: "{{ show_interface.response|selectattr('interface', 'match', '^Loopback')|list }}"
-    tags: ['svi', 'loop', 'layer3', 'eigrp']
-
-  - name: list of layer 3 interface
-    set_fact:
-      interface_list: "{{ show_interface.response|selectattr('interface', 'match', '^Et')|list }}"
-    tags: ['svi', 'loop', 'layer3', 'eigrp']
-
-  - set_fact:
-      router_id: "{{ loopback_list|selectattr('interface', 'match', 'Loopback0')|map(attribute='ip_address')|list }}"
-    tags: ['svi', 'loop', 'layer3', 'eigrp']
-
   - include_role:
-      name: roles/interfaces
-      tasks_from: tasks/svi.yml
+      name: interfaces
+      tasks_from: svi.yml
     tags: svi
 
   - include_role:
-      name: roles/interfaces
-      tasks_from: tasks/loopback.yml
+      name: interfaces
+      tasks_from: loopback.yml
     tags: loop
 
-  - include_vars: vars/networks.yml
-    tags: ['svi', 'loop', 'layer3', 'eigrp']
-
   - include_role:
-      name: roles/interfaces
-      tasks_from: tasks/layer3.yml
+      name: interfaces
+      tasks_from: layer3.yml
     tags: layer3
 
   - include_role:
-      name: roles/routing
-      tasks_from: tasks/eigrp.yml
+      name: routing
+      tasks_from: facts.yml
+    tags: ['svi', 'loop', 'layer3', 'eigrp']
+
+  - include_role:
+      name: routing
+      tasks_from: eigrp.yml
     tags: ['svi', 'loop', 'layer3', 'eigrp']

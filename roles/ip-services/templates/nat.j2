@@ -1,3 +1,4 @@
+
 {# Configure inside and outside interface for nat #}
 {% for c in interfaces if c.ip_nat is defined %}
     interface {{ c.interface }}

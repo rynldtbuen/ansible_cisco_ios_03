@@ -1,4 +1,5 @@
 ---
+
 - name: default route
   ios_config:
     src: default-route.j2

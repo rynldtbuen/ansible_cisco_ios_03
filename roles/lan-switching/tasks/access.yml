@@ -1,4 +1,5 @@
 ---
+
 - name: fail if data VLAN not exist in vlan_01
   fail: msg="no data VLAN {{ item.data }} found on {{ ansible_hostname }} vlan_01 variable"
   with_items: "{{ access_ports }}"

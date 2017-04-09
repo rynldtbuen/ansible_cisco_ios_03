@@ -6,14 +6,13 @@
   serial: 1
 
   tasks:
+  - include_role:
+      name: lan-switching
+      tasks_from: vlan.yml
 
   - include_role:
       name: lan-switching
       tasks_from: facts.yml
-
-  - include_role:
-      name: lan-switching
-      tasks_from: vlan.yml
 
   - name: difference between active VLANs and variable VLANs
     set_fact:

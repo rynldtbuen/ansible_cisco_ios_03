@@ -7,10 +7,6 @@ trunk_ports:
   - { ports: ['Et0/2 - 3'], group: 2 }
   - { ports: ['Et1/0 - 1'], group: 3 }
 
-#access_ports:
-#  - { ports: ['Et1/0 - 3'], data: 100 }
-#  - { ports: ['Et2/0 - 3'], data: 120 }
-
 svi_id: 2
 loop_id: 21
 

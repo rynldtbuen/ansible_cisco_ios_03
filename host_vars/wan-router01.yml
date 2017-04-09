@@ -8,7 +8,7 @@ interfaces: # - { interface: , host: , net: "{{ tem.net }}", mask: "{{ tem.mask 
 nat: true
 
 nat_acl:
-  - seq_no: "12"
+  - seq_no: "10"
     line: permit 192.168.0.0 0.0.255.255
-  - seq_no: "22"
+  - seq_no: "20"
     line: permit 10.0.0.0 0.0.0.255

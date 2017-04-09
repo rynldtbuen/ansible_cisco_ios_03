@@ -10,7 +10,6 @@ spanning-tree portfast default
       spanning-tree vlan {{ c.id }} priority 8192
     {% endfor %}
 
-
 {% endif %}
 
 {% if ansible_hostname == 'dist-sw02' %}

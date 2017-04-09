@@ -21,7 +21,7 @@ device configuration:
     - layer 3 interface
   - routing protocols
     - eigrp (named)
-  ip-services
+  - ip-services
     - gateway load balancing protocol(GLBP)
     - nat
     - acl

@@ -1,4 +1,5 @@
 ---
+
 - name: fail if native VLAN not exist on variable vlan_01
   fail: msg="no native VLAN {{ native }} found on [switches] vlan_02 variable"
   when: native not in vars_vlan_id
